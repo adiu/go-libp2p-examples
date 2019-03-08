@@ -43,6 +43,8 @@ import (
 	"github.com/libp2p/go-libp2p-crypto"
 	"github.com/libp2p/go-libp2p-net"
 	"github.com/libp2p/go-libp2p-peerstore"
+	"github.com/libp2p/go-libp2p-pubsub"
+
 	"github.com/multiformats/go-multiaddr"
 )
 
@@ -134,6 +136,13 @@ func main() {
 		libp2p.ListenAddrs(sourceMultiAddr),
 		libp2p.Identity(prvKey),
 	)
+
+	ps, err := pubsub.NewGossipSub(context.Background(), host)
+	if err != nil {
+		panic(err)
+	}
+
+	ps.Subscribe("chat")
 
 	if err != nil {
 		panic(err)
