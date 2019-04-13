@@ -2,8 +2,8 @@
 
 default: build
 
+gomod: export GO111MODULE=on
 gomod:
-	export GO111MODULE=on
 	go mod tidy
 	go mod vendor
 
